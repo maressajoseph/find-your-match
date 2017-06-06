@@ -1,3 +1,10 @@
+User.destroy_all
+AvailableCombination.destroy_all
+MatchDay.destroy_all
+Match.destroy_all
+
+
+
 admin = User.create!(email: "hi@hi.com", password: "123456", admin: true)
 
 student_a = User.create!(email: "h1@ho.com", password: "123456", admin: false)
@@ -14,5 +21,7 @@ student_i = User.create!(email: "h9@ho.com", password: "123456", admin: false)
 combinations = AvailableCombination.create!(combis: [])
 
 today = MatchDay.create!(day: Date.today, available_combination: combinations)
+tomorrow = MatchDay.create!(day: Date.today, available_combination: combinations)
 
-match1 = Match.create!(match_day: today, student1: student_a, student2: student_b)
+
+#match1 = Match.create!(match_day: today, student1: student_a, student2: student_b)
