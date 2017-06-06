@@ -1,0 +1,2 @@
+module AvailableCombinationsHelper
+end
