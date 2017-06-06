@@ -10,10 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170606095056) do
+ActiveRecord::Schema.define(version: 20170606103924) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "match_days", force: :cascade do |t|
+    t.date "day"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "matches", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "student1_id"
+    t.bigint "student2_id"
+    t.bigint "match_day_id"
+    t.index ["match_day_id"], name: "index_matches_on_match_day_id"
+    t.index ["student1_id"], name: "index_matches_on_student1_id"
+    t.index ["student2_id"], name: "index_matches_on_student2_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -29,8 +46,13 @@ ActiveRecord::Schema.define(version: 20170606095056) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "admin", default: false
+    t.string "first_name"
+    t.string "last_name"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "matches", "match_days"
+  add_foreign_key "matches", "users", column: "student1_id"
+  add_foreign_key "matches", "users", column: "student2_id"
 end
