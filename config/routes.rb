@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   devise_scope :user do
-    get '/adminpage' => 'devise#index'
+    get '/adminpage' => 'users#index'
   end
 
   root to: 'pages#home'
