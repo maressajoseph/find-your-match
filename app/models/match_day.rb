@@ -25,11 +25,11 @@ class MatchDay < ApplicationRecord
   end
 
   private
-  def find_sub_array(array, value)
-    array.each do |subarray|
-      if subarray.include?(value)
-        return subarray
+    def find_sub_array(array, value)
+      array.each do |subarray|
+        if subarray.include?(value)
+          return subarray
+      end
     end
   end
-
 end
