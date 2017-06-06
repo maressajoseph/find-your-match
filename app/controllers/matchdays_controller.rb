@@ -1,0 +1,3 @@
+class MatchdaysController < ApplicationController
+
+end
