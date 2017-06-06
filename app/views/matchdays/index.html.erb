@@ -1,0 +1,4 @@
+<div class="col-md-12 container">
+  <div>date=<%= Date.today %></div>
+  <div><%= link_to "new matches baby", matchdays_url(day:Date.today, available_combination: AvailableCombination.first), method: :post %></div>
+</div>

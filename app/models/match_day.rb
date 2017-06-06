@@ -4,6 +4,8 @@ class MatchDay < ApplicationRecord
   has_many :matches
   belongs_to :available_combination
 
+  validates :day, presence: true, uniqueness: true
+
   def self.test_self
     puts available_combination.combis.length
   end
@@ -12,7 +14,7 @@ class MatchDay < ApplicationRecord
     available_students = User.where(admin: false).ids
     available_combinations = get_combinations(available_students)
 
-    while available_students.length >= 2 do
+    while available_students.length > 1 do
       student_combination = find_sub_array(available_combinations, available_students.first, available_students)
       available_combinations.delete(student_combination)
       available_students -= student_combination

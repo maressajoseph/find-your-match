@@ -1,7 +1,7 @@
 // application.js
-//
+
 //= require jquery
 //= require bootstrap-sprockets
-//= require jquery-ujs
+//= require jquery_ujs
 //= require turbolinks
 //= require_tree .
