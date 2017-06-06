@@ -23,6 +23,7 @@ class MatchDay < ApplicationRecord
   end
 
   private
+
   def find_sub_array(available_combinations, student, available_students)
     available_combinations.each do |subarray|
       if subarray.include?(student) && (subarray - available_students).empty?
@@ -38,5 +39,4 @@ class MatchDay < ApplicationRecord
       available_students.combination(2).to_a
     end
   end
-
 end
