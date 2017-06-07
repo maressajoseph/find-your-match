@@ -8,6 +8,15 @@ class User < ApplicationRecord
   has_many :student2_matches, class_name: "Match", foreign_key: :student2_id
 
   def is_admin?
-    admin == true
+    admin
+  end
+
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+
+  def change_admin
+    self.admin = !self.admin
+    self.save
   end
 end
