@@ -1,0 +1,18 @@
+<% view_date = Date.today %>
+<% view_week_days = (view_date.at_beginning_of_week..view_date.at_end_of_week) %>
+<% view_week_days.each do |day| %>
+  <div class="panel panel-default col-xs-1">
+    <div class="col-xs-12"><%= day.strftime("%A") %></div>
+    <div class="col-xs-12"><%= day.strftime("%d-%m-%Y") %></div><hr>
+    <div class="col-xs-12">
+      <%  matchday = MatchDay.where(day: day).first %>
+      <% if matchday.nil? %>
+        <%= link_to "Add a new match", matchdays_path(day: day, group: Group.first), method: :post %></div>
+      <% else %>
+        <% matchday.matches.each do |match| %>
+          <p><%=  "#{match.student1.first_name} - #{match.student2.first_name}"%></p>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
