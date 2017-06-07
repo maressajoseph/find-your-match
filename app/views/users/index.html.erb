@@ -1,8 +1,26 @@
 <% if current_user.is_admin? %>
 <div class="container">
-  <% @users.each do |user| %>
-    <%= user.email %>
-    <%= user.admin %>
-  <% end %>
+  <h2>Admin Page</h2>
+  <p>Click on the button to promote a student to admin or to demote an admin to student</p><br>
+  <div class="row">
+    <div class="col-xs-3"><p>EMAIL ADDRESS</p></div>
+    <div class="col-xs-5"><p>NAME</p></div>
+    <div class="col-xs-4"><p>ADMIN</p></div>
+    <% @users.each do |user| %>
+      <div class="col-xs-3">
+        <%= user.email %>
+      </div>
+      <div class="col-xs-5">
+        <%= user.full_name %>
+      </div>
+      <div class="col-xs-4">
+        <% if user.is_admin? %>
+          <%= link_to "", adminpage_path(user.id), class: "btn btn-default glyphicon glyphicon-ok", method: :post %>
+        <% else %>
+          <%= link_to "", adminpage_path(user.id), class: "btn btn-default glyphicon glyphicon-minus", method: :post %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
 </div>
 <% end  %>
