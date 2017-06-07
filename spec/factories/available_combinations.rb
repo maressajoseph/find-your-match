@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :available_combination do
+  factory :group do
     combis ""
   end
 end
