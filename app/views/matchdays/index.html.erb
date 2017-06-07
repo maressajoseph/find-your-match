@@ -3,7 +3,6 @@
 
 <% if current_user.is_admin? %>
 <div class="col-md-12 container">
-  <div>date=<%= Date.today %></div>
-  <div><%= link_to "new matches baby", matchdays_path(day:Date.today, group: Group.first), method: :post %></div>
+  <%= render 'show_week' %>
 </div>
 <% end  %>
