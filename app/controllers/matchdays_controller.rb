@@ -8,7 +8,7 @@ class MatchdaysController < ApplicationController
  end
 
  def create
-   @matchday = MatchDay.new(match_day_params.merge(day: params[:day], available_combination: AvailableCombination.find(params[:available_combination])))
+   @matchday = MatchDay.new(match_day_params.merge(day: params[:day], group: Group.find(params[:group])))
    if @matchday.save
      redirect_to 'index'
    end
@@ -16,6 +16,6 @@ class MatchdaysController < ApplicationController
 
  private
    def match_day_params
-     params.permit(:day, :available_combination)
+     params.permit(:day, :group)
    end
 end

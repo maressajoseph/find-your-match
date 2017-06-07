@@ -1,0 +1,8 @@
+<% if current_user.is_admin? %>
+<div class="container">
+  <% @users.each do |user| %>
+    <%= user.email %>
+    <%= user.admin %>
+  <% end %>
+</div>
+<% end  %>

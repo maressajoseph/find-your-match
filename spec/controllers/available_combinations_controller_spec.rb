@@ -1,5 +1,5 @@
 require 'rails_helper'
 
-RSpec.describe AvailableCombinationsController, type: :controller do
+RSpec.describe GroupsController, type: :controller do
 
 end
