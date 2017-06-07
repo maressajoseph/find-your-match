@@ -1,7 +1,7 @@
 class MatchDay < ApplicationRecord
   after_create :create_matches
 
-  has_many :matches
+  has_many :matches, dependent: :destroy
   belongs_to :group
 
   validates :day, presence: true, uniqueness: true
@@ -13,37 +13,38 @@ class MatchDay < ApplicationRecord
   end
 
   def create_matches
-    available_students = User.where(admin: false).ids
-    groups = get_combinations(available_students)
+    available_students = User.where(admin: false).where(dummy: false).ids
     if available_students.length.odd?
-    
+      available_students << User.where(admin: false).where(dummy: true).ids
+      available_students = available_students.flatten
     end
+    available_combinations = get_combinations(available_students)
 
-    while available_students.length > 1 do
-      student_combination = find_sub_array(groups, available_students, available_students.first)
-      groups.delete(student_combination)
-      available_students -= student_combination
-      Match.create(student1: User.find(student_combination[0]), student2: User.find(student_combination[1]), match_day: self)
+    for i in 0..(available_combinations.first.length-1)/2 do
+      student1 = available_combinations.first[i]
+      student2 = available_combinations.first[available_combinations.first.length-1-i]
+      Match.create(student1: User.find(student1), student2: User.find(student2), match_day: self)
     end
-    self.group.combis = groups
+    available_combinations.shift
+    self.group.combis = available_combinations.to_a
     self.group.save
   end
 
   private
+  def get_student_combination
 
-  def find_sub_array(groups, available_students, student)
-    groups.each do |subarray|
-      if subarray.include?(student) && (subarray - available_students).empty?
-        return subarray
-      end
-    end
   end
 
   def get_combinations(available_students)
-    if self.group.combis.length >= available_students.length / 2
-      self.group.combis
+    if self.group.combis.length > 0
+      return self.group.combis
     else
-      available_students.combination(2).to_a
+      available_combinations = []
+      available_combinations[0] = available_students
+      for i in (1..available_students.length-1)
+        available_combinations[i] = available_combinations[i-1][0..available_students.length-2].rotate + [available_combinations[i-2][available_students.length-1]]
+      end
+      return available_combinations
     end
   end
 end
