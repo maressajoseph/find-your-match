@@ -18,6 +18,7 @@ class MatchDay < ApplicationRecord
       available_students << User.where(admin: false).where(dummy: true).ids
       available_students = available_students.flatten
     end
+
     available_combinations = get_combinations(available_students)
 
     for i in 0..(available_combinations.first.length-1)/2 do
@@ -25,16 +26,13 @@ class MatchDay < ApplicationRecord
       student2 = available_combinations.first[available_combinations.first.length-1-i]
       Match.create(student1: User.find(student1), student2: User.find(student2), match_day: self)
     end
+
     available_combinations.shift
     self.group.combis = available_combinations.to_a
     self.group.save
   end
 
   private
-  def get_student_combination
-
-  end
-
   def get_combinations(available_students)
     if self.group.combis.length > 0
       return self.group.combis
