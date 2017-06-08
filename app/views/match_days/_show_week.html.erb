@@ -1,5 +1,5 @@
 <div class="row" >
-  <div class="col-xs-1 box text-center"><%= link_to "<", match_days_path(view_date: @view_date - 7.days), class: "shift-week", id: @view_date - 7.days %></div>
+  <div class="col-xs-1 box text-center"><%= link_to "<", match_days_path, class: "shift-week week-backward", id: @view_date - 7.days %></div>
   <div id="weekcontainer"><%= render @match_days %></div>
-  <div class="col-xs-1 box text-center"><%= link_to ">", match_days_path(view_date: @view_date + 7.days), class: "shift-week", id: @view_date + 7.days %></div>
+  <div class="col-xs-1 box text-center"><%= link_to ">", match_days_path, class: "shift-week week-forward", id: @view_date + 7.days %></div>
 </div>

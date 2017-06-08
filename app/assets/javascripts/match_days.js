@@ -1,9 +1,6 @@
 function shiftWeek(event){
-
-
   var viewDate = event.target.id;
-  var url = event.target.url;
-
+  var url = event.target.href;
 
   $.ajax({
     url: url,
@@ -15,7 +12,8 @@ function shiftWeek(event){
     })
   })
   .done(function(data){
-      $('#show-week-container').html(" ")
+    $('#week-backward').id = data.backward;
+    $('#week-forward').id = data.forward;
   })
 };
 

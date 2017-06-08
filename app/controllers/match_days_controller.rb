@@ -1,17 +1,24 @@
 class MatchDaysController < ApplicationController
   def index
     grouping = Group.first
-    if @view_date.nil?
+    #dat = Date.parse params[:view_date]
+    puts "*"*50
+    #puts dat
+    puts "*"*50
+
+    if params[:view_date].nil?
         @view_date = Date.today
-      else
-        @view_date = params[:view_date]
-      end
+    else
+        @view_date = Date.parse params[:view_date]
+    end
 
     @match_days = get_weeks_match_days(@view_date, grouping)
+    backward_date = @view_date - 7.days
+    forward_date = @view_date + 7.days
 
     respond_to do |format|
       format.html
-      format.json { render json: @match_days }
+      format.json { render json: {match_days: @match_days, backward: backward_date, forward: forward_date } }
     end
   end
 
