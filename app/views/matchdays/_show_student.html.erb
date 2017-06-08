@@ -1,12 +1,18 @@
 <% matchday = MatchDay.where(day: Date.today).first %>
-<% matches_of_today = matchday.matches %>
-<% match_of_current_user = matches_of_today.where(student1_id: current_user).or(matches_of_today.where(student2_id: current_user)) %>
-<h3>Your match of the day: </h3>
-  <% if !match_of_current_user[0].nil? %>
-    <h5><%= match_of_current_user[0].student1.full_name %> & <%= match_of_current_user[0].student2.full_name %></h5>
-  <% else %>
-    <h5>You haven't been paired up today</h5>
-  <% end %>
+<% if matchday.nil? %>
+  <h3>Your match of the day: </h3>
+  <h5>You haven't been paired up today</h5>
+<% else %>
+  <% matches_of_today = matchday.matches %>
+  <% match_of_current_user = matches_of_today.where(student1_id: current_user).or(matches_of_today.where(student2_id: current_user)) %>
+<% end %>
+<% if !matchday.nil? && !match_of_current_user[0].nil? %>
+  <h3>Your match of the day: </h3>
+  <h5><%= match_of_current_user[0].student1.full_name %> & <%= match_of_current_user[0].student2.full_name %></h5>
+<% end %>
+<% if !matchday.nil? && match_of_current_user[0].nil? %>
+  <h5>You haven't been paired up today</h5>
+<% end %>
 <br><br><hr><br><br>
 <h3>Your previous matches</h3>
   <% history = MatchDay.where('day < ?', Date.today) %>
