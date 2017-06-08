@@ -1,6 +1,7 @@
 class MatchdaysController < ApplicationController
  def index
-
+   @view_date = Date.today
+   @view_week_days = (@view_date.at_beginning_of_week..@view_date.at_end_of_week)
  end
 
  def new
