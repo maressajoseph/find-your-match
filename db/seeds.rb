@@ -6,6 +6,7 @@ Match.destroy_all
 
 
 admin = User.create!(email: "admin@admin.com", password: "123456", admin: true)
+henk =  User.create!(email: "henk@jan.com", password: "123456", admin: true)
 
 student_dummy = User.create!(email: "dummy@dummy.com", password: "123456", admin: false, dummy: true, first_name: "NIEMAND, SUKKEL")
 
