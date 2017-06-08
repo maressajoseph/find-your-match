@@ -1,2 +1,10 @@
 @import 'bootstrap-sprockets';
 @import "bootstrap";
+
+.box {
+  width: 160px
+}
+
+.day-of-the-week {
+  font-weight: bold;
+}
