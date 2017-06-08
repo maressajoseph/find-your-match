@@ -1,4 +1,16 @@
-<%  matchday = MatchDay.where(day: Date.today).first %>
+<% matchday = MatchDay.where(day: Date.today).first %>
 <% matches_of_today = matchday.matches %>
-<h2>Your match of the day</h2>
-<%= matches_of_today.where(student1_id: current_user) %>
+<% match_of_current_user = matches_of_today.where(student1_id: current_user).or(matches_of_today.where(student2_id: current_user)) %>
+<h3>Your match of the day: </h3>
+  <h5><%= match_of_current_user[0].student1.first_name %> & <%= match_of_current_user[0].student2.first_name %></h5>
+<br><br><hr><br><br>
+<h3>Your previous matches</h3>
+  <% history = MatchDay.where('day < ?', Date.today) %>
+  <% previous_matches = history.map { |x| x.matches.where(student1_id: current_user).or(x.matches.where(student2_id: current_user)) } %>
+  <% previous_matches.each do |x| %>
+    <% x.each do |y| %>
+      <% match = y %>
+      <h5><%= match.match_day.day.strftime("%A: %d/%m/%Y") %></h5>
+      <p><%= match.student1.first_name %> & <%= match.student2.first_name %></p>
+    <% end %>
+  <% end %>
