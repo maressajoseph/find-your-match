@@ -16,7 +16,7 @@
   </div>
 <% else %>
   <div class="container">
-    <h1 class="welcome text-center">Welcome <%= current_user.full_name %></h1>
+    <h1 class="welcome text-center">Welcome, <%= current_user.full_name %></h1>
     <br><br>
     <%= render file: 'matchdays/index' %>
   </div>
