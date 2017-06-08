@@ -1,0 +1,23 @@
+<% if current_user.nil? %>
+  <div class="jumbotron">
+   <div class="container">
+      <h1 class="welcome text-center">WELCOME TO FIND YOUR MATCH</h1>
+      <p class="text-center">Please log in to continue using this app</p><br>
+      <div class="row">
+        <div class="col-xs-5"></div>
+        <div class="col-xs-1">
+          <%= link_to "Log In", new_user_session_path, class:"btn btn-default" %>
+        </div>
+        <div class="col-xs-1">
+          <%= link_to "Sign Up", new_user_registration_path, class:"btn btn-default" %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% else %>
+  <div class="container">
+    <h1 class="welcome text-center">Welcome <%= current_user.full_name %></h1>
+    <br><br>
+    <%= render file: 'matchdays/index' %>
+  </div>
+<% end %>
