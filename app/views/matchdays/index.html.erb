@@ -1,9 +1,9 @@
 <% if current_user.is_admin? %>
   <div class="container">
-    <%= render 'show_week' %>
+    <%= render 'matchdays/show_week' %>
   </div>
 <% else %>
   <div class="container">
-    <%= render 'show_student' %>
+    <%= render 'matchdays/show_student' %>
   </div>
 <% end  %>

@@ -34,7 +34,7 @@ class MatchDay < ApplicationRecord
 
   private
   def get_combinations(available_students)
-    if self.group.combis.length > 0
+    if self.group.combis.length > 0 && (self.group.combis[0].sort == available_students.sort) 
       return self.group.combis
     else
       available_combinations = []

@@ -1,6 +1,24 @@
 @import 'bootstrap-sprockets';
 @import "bootstrap";
 
+body {
+  font-family: 'Raleway', sans-serif;
+  font-size: 15px;
+}
+
+.jumbotron {
+  background-color: #18BC97;
+  color: white;
+}
+
+a .log {
+  text-decoration: none;
+  color: #def0e5;
+}
+
+.welcome {
+  font-weight: bold;
+}
 .box {
   width: 160px
 }
