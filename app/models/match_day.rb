@@ -6,6 +6,12 @@ class MatchDay < ApplicationRecord
 
   validates :day, presence: true, uniqueness: true
 
+
+
+  def self.test_self
+    puts group.combis.length
+  end
+
   def create_matches
     available_students = User.where(admin: false).where(dummy: false).ids
     if available_students.length.odd?
@@ -31,11 +37,11 @@ class MatchDay < ApplicationRecord
     if self.group.combis.length > 0
       return self.group.combis
     else
-        available_combinations = []
-        available_combinations[0] = available_students
-        for i in (1..available_students.length-1)
-          available_combinations[i] = available_combinations[i-1][0..available_students.length-2].rotate + [available_combinations[i-1][available_students.length-1]]
-        end
+      available_combinations = []
+      available_combinations[0] = available_students
+      for i in (1..available_students.length-1)
+        available_combinations[i] = available_combinations[i-1][0..available_students.length-2].rotate + [available_combinations[i-2][available_students.length-1]]
+      end
       return available_combinations
     end
   end
