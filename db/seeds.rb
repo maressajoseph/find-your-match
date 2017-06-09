@@ -6,6 +6,7 @@ Match.destroy_all
 
 
 admin = User.create!(email: "admin@admin.com", password: "123456", admin: true, first_name: "I am", last_name: "Admin")
+admin2 = User.create!(email: "henk@jan.com", password: "123456", admin: true, first_name: "I am", last_name: "Admin")
 
 student_dummy = User.create!(email: "dummy@dummy.com", password: "123456", admin: false, dummy: true, first_name: "Nobody", last_name: "You can add yourself to another pair today, because there's an odd number of students")
 
@@ -21,12 +22,3 @@ student_i = User.create!(email: "h9@ho.com", password: "123456", admin: false, f
 
 
 group1 = Group.create!(combis: [])
-
-#daybeforeyesterday = MatchDay.create!(day: Date.today-2, group: group1)
-#yesterday = MatchDay.create!(day: Date.today-1, group: group1)
-# today = MatchDay.create!(day: Date.today, group: group1)
-#tomorrow = MatchDay.create!(day: Date.today+1, group: group1)
-#dayaftertomorrow = MatchDay.create!(day: Date.today+2, group: group1)
-
-
-#match1 = Match.create!(match_day: today, student1: student_a, student2: student_b)

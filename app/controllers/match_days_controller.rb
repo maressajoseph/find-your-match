@@ -17,7 +17,14 @@ class MatchDaysController < ApplicationController
   end
 
   def create
-    @matchday = MatchDay.new(match_day_params.merge(day: params[:day], group: Group.find(params[:group])))
+    @matchday = MatchDay.new(match_day_params.merge(id: params[:id], day: params[:day], group: Group.find(params[:group])))
+    if @matchday.save
+      redirect_to match_days_path(view_date: params[:day])
+    end
+  end
+
+  def update
+    @matchday = MatchDay.new(match_day_params.merge( day: params[:day], group: Group.find(params[:group])))
     if @matchday.save
       redirect_to match_days_path(view_date: params[:day])
     end
