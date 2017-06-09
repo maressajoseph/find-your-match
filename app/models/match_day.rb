@@ -14,7 +14,7 @@ after_create :create_matches
     available_combinations = deplete_combinations(all_combinations, self.group.combis)
     if available_combinations.empty?
       self.group.combis = []
-      available_combinations = all_combinations
+      available_combinations = get_combinations(available_students)
     end
     available_combinations.first.each do |set|
       Match.create(student1: User.find(set.first), student2: User.find(set.last), match_day: self)
