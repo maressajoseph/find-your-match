@@ -2,7 +2,7 @@
   <p class="day-of-the-week"><%= match_day.day.strftime("%A") %></p>
   <p><%= match_day.day.strftime("%d/%m/%Y") %></p><hr>
       <% if match_day.matches.length == 0 %>
-        <%= link_to "Add a new match", match_days_path(day: match_day.day, group: @group), class:"text-center", method: :post %>
+        <%= link_to "Add a new match", match_days_path(day: match_day.day, group: @group), class:"text-center addmatch", method: :post %>
       <% else %>
         <% match_day.matches.each do |match| %>
           <p><%=  "#{match.student1.first_name} - #{match.student2.first_name}"%></p>

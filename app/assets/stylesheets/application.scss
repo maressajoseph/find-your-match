@@ -24,5 +24,39 @@ a .log {
 }
 
 .day-of-the-week {
-  font-weight: bold;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.arrow {
+  font-size: 18px;
+  color: #18BC97;
+}
+
+.arrow:hover {
+  font-size: 18px;
+  color: #18BC97;
+  text-decoration: none;
+}
+
+a {
+  color: #18BC97;
+}
+
+a:hover {
+  color: #18BC97;
+  text-decoration: none;
+}
+
+h6 {
+  font-size: 15px;
+  color: #a5a5a5;
+}
+
+h3 {
+  color: #18BC97;
+}
+
+#admin {
+  color: #18BC97;
 }

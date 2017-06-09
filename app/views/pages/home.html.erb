@@ -14,10 +14,25 @@
       </div>
     </div>
   </div>
-<% else %>
+<% elsif !current_user.is_admin? %>
   <div class="container">
-    <h1 class="welcome text-center">Welcome, <%= current_user.full_name %></h1>
+    <h1 class="welcome text-center">Welcome, <%= current_user.full_name %>!</h1>
     <br><br>
     <%= render file: 'match_days/index' %>
+  </div>
+<% else %>
+  <div class="container">
+    <h1 class="welcome text-center">Welcome, <%= current_user.full_name %>!</h1>
+    <br><br>
+    <div class="row">
+      <div class="col-xs-3">
+      </div>
+      <div class="col-xs-4">
+        <h4><%= link_to "Go to your admin page", adminpage_path %></h4>
+      </div>
+      <div class="col-xs-3">
+        <h4><%= link_to "Overview of matches", match_days_path %></h4>
+      </div>
+    </div>
   </div>
 <% end %>

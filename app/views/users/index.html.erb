@@ -1,6 +1,6 @@
 <% if current_user.is_admin? %>
 <div class="container">
-  <h2>Admin Page</h2>
+  <h2 id="admin">Admin Page</h2>
   <p>Click on the button to promote a student to admin or to demote an admin to student</p><br>
   <div class="row">
     <div class="col-xs-3"><p>EMAIL ADDRESS</p></div>
@@ -16,9 +16,9 @@
         </div>
         <div class="col-xs-4">
           <% if user.is_admin? %>
-            <%= link_to "", adminpage_path(user.id), class: "btn btn-default glyphicon glyphicon-ok adminchange", method: :put %>
+            <%= link_to "", adminpage_path(user.id), class: "btn btn-default glyphicon glyphicon-ok adminchange" %>
           <% else %>
-            <%= link_to "", adminpage_path(user.id), class: "btn btn-default glyphicon glyphicon-minus adminchange", method: :put %>
+            <%= link_to "", adminpage_path(user.id), class: "btn btn-default glyphicon glyphicon-minus adminchange" %>
           <% end %>
         </div>
       <% end %>

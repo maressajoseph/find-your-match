@@ -1,6 +1,6 @@
+<br><br><br>
 <div class="row" >
-  <div class="col-xs-1 box text-center"><%= link_to "<", match_days_path(view_date: @view_date - 7.days), class: "shift-week week-backward"%></div>
+  <div class="col-xs-1 box text-center"><%= link_to "", match_days_path(view_date: @view_date - 7.days), class: "glyphicon glyphicon-chevron-left arrow shift-week week-backward"%></div>
   <div id="weekcontainer"><%= render @match_days %></div>
-  <div class="col-xs-1 box text-center"><%= link_to ">", match_days_path(view_date: @view_date + 7.days), class: "shift-week week-forward" %></div>
+  <div class="col-xs-1 box text-center"><%= link_to "", match_days_path(view_date: @view_date + 7.days), class: "glyphicon glyphicon-chevron-right arrow shift-week week-forward" %></div>
 </div>
-  

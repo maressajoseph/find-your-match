@@ -1,5 +1,6 @@
 class PagesController < ApplicationController
-  def index
+  def home
+    @match_days = MatchDay.where(user_id: @user)
   end
-  
+
 end

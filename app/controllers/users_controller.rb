@@ -16,7 +16,7 @@ class UsersController < ApplicationController
     @user.change_admin
     respond_to do |format|
        format.html { redirect_to adminpage_path, notice: "The user's admin status is now changed" }
-       format.json { render json: @user }
+       format.json { render json: @user.is_admin? }
      end
   end
 
