@@ -14,8 +14,12 @@ class UsersController < ApplicationController
 
   def change_admin
     @user.change_admin
-    redirect_to adminpage_path, notice: "The user's admin status is now changed"
+    respond_to do |format|
+       format.html { redirect_to adminpage_path, notice: "The user's admin status is now changed" }
+       format.json { render json: @user }
+     end
   end
+
 private
 
   def set_user
