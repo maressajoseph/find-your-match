@@ -9,7 +9,7 @@ class MatchDaysController < ApplicationController
     end
 
     @match_days = get_weeks_match_days(@view_date, @group)
-    
+
     respond_to do |format|
       format.html
       format.json { render json: {match_days: @match_days, backward: backward_date, forward: forward_date } }
