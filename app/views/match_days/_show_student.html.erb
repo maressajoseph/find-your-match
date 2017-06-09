@@ -1,4 +1,0 @@
-<%  matchday = MatchDay.where(day: Date.today).first %>
-<% matches_of_today = matchday.matches %>
-<h2>Your match of the day</h2>
-<%= matches_of_today.where(student1_id: current_user) %>

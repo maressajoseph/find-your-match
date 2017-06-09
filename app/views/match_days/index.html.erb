@@ -1,9 +1,9 @@
 <% if current_user.is_admin? %>
-  <div class="container-liquid col-xs-offset-1", id="show-week-container">
-    <%= render 'show_week' %>
+  <div class="container">
+    <%= render 'matchdays/show_week' %>
   </div>
 <% else %>
   <div class="container">
-    <%= render 'show_student' %>
+    <%= render 'matchdays/show_student' %>
   </div>
 <% end  %>
