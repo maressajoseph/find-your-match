@@ -10,10 +10,6 @@ class MatchDaysController < ApplicationController
 
     @match_days = get_weeks_match_days(@view_date, @group)
 
-    respond_to do |format|
-      format.html
-      format.json { render json: {match_days: @match_days, backward: backward_date, forward: forward_date } }
-    end
   end
 
   def new
@@ -23,7 +19,7 @@ class MatchDaysController < ApplicationController
   def create
     @matchday = MatchDay.new(match_day_params.merge(day: params[:day], group: Group.find(params[:group])))
     if @matchday.save
-      redirect_to match_days_path
+      redirect_to match_days_path(view_date: params[:day])
     end
   end
 
