@@ -1,5 +1,5 @@
 FactoryGirl.define do
   factory :match_day do
-    day "2017-06-06"
+    day { Faker::Date.between(10.years.ago, 10.years.from_now)}
   end
 end
