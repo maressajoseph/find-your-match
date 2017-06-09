@@ -7,42 +7,53 @@ class MatchDay < ApplicationRecord
   validates :day, presence: true, uniqueness: true
 
 
+  def create_matches
+    available_students = get_available_students
 
-  def self.test_self
-    puts group.combis.length
+    all_combinations = get_combinations(available_students)
+    available_combinations = deplete_combinations(all_combinations, self.group.combis)
+      available_combinations.rand(0,available_combinations.length).each do |set|
+        Match.create(student1: User.find(set.first), student2: User.find(set.last), match_day: self
+        self.group.combis << set
+      end
+    self.group.save
   end
 
-  def create_matches
+
+  private
+  def get_available_students
     available_students = User.where(admin: false).where(dummy: false).ids
     if available_students.length.odd?
       available_students << User.where(admin: false).where(dummy: true).ids
       available_students = available_students.flatten
     end
-
-    available_combinations = get_combinations(available_students)
-
-    for i in 0..(available_combinations.first.length-1)/2 do
-      student1 = available_combinations.first[i]
-      student2 = available_combinations.first[available_combinations.first.length-1-i]
-      Match.create(student1: User.find(student1), student2: User.find(student2), match_day: self)
-    end
-
-    available_combinations.shift
-    self.group.combis = available_combinations.to_a
-    self.group.save
+    return available_students
   end
 
-  private
   def get_combinations(available_students)
-    if self.group.combis.length > 0
-      return self.group.combis
-    else
-      available_combinations = []
-      available_combinations[0] = available_students
-      for i in (1..available_students.length-1)
-        available_combinations[i] = available_combinations[i-1][0..available_students.length-2].rotate + [available_combinations[i-2][available_students.length-1]]
-      end
-      return available_combinations
+    matchtable = []
+    matchtable[0] = available_students
+    for i in (1..available_students.length-1)
+      matchtable[i] = matchtable[i-1][0..available_students.length-2].rotate + [matchtable[i-2][available_students.length-1]]
     end
+
+    all_combinations = []
+    for i in 0..matchtable.length
+      daily_matches = []
+      for t in 0..(matchtable[i].length-1)/2 do
+        student1 = matchtable.first[t]
+        student2 = matchtable.first[matchtable.first.length-1-t]
+        daily matches << [student1, student2]
+      end
+      all_combinations << daily_matches
+    end
+    return all_combinations
+  end
+
+  def deplete_combinations(all_combinations, used_combinations)
+    all_combinations.each do |daily_set|
+      daily_set.delete_if { daily_set - used_combinations != daily_set }
+    end
+    return all_combinations
   end
 end
