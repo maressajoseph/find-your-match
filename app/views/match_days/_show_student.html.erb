@@ -1,0 +1,33 @@
+
+<% matchday = MatchDay.where(day: Date.today).first %>
+<% if matchday.nil? %>
+<div class="row">
+  <h3>Your match of the day: </h3>
+  <h5>You haven't been paired up today</h5>
+<% else %>
+  <% matches_of_today = matchday.matches %>
+  <% match_of_current_user = matches_of_today.where(student1_id: current_user).or(matches_of_today.where(student2_id: current_user)) %>
+<% end %>
+<% if !matchday.nil? && !match_of_current_user[0].nil? %>
+  <h3>Your match of the day: </h3>
+  <h5><%= match_of_current_user[0].student1.full_name %> & <%= match_of_current_user[0].student2.full_name %></h5>
+<% end %>
+<% if !matchday.nil? && match_of_current_user[0].nil? %>
+  <h3>Your match of the day: </h3>
+  <h5>You haven't been paired up today</h5>
+<% end %>
+<br><br><hr><br><br>
+<h3>Your previous matches</h3>
+  <div id="scroll" style="overflow-y:scroll; height:180px; width:300px;">
+    <% history = MatchDay.where('day < ?', Date.today) %>
+    <% previous_matches = history.map { |x| x.matches.where(student1_id: current_user).or(x.matches.where(student2_id: current_user)) } %>
+    <% previous_matches.each do |x| %>
+      <% x.each do |y| %>
+        <% match = y %>
+        <h4><%= match.match_day.day.strftime("%A") %></h4>
+        <h5><%= match.match_day.day.strftime("%d/%m/%Y") %></h5>
+        <h5><%= match.student1.first_name %> & <%= match.student2.first_name %></h5>
+        <br>
+      <% end %>
+    <% end %>
+  </div>
