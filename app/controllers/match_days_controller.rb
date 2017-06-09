@@ -1,10 +1,6 @@
 class MatchDaysController < ApplicationController
   def index
-    grouping = Group.first
-    #dat = Date.parse params[:view_date]
-    puts "*"*50
-    #puts dat
-    puts "*"*50
+    @group = Group.first
 
     if params[:view_date].nil?
         @view_date = Date.today
@@ -12,7 +8,9 @@ class MatchDaysController < ApplicationController
         @view_date = Date.parse params[:view_date]
     end
 
-    @match_days = get_weeks_match_days(@view_date, grouping)
+    @match_days = get_weeks_match_days(@view_date, @group)
+
+    @student1names = @match_days.map(&:matches).map(&:student1).map(&:first_name)
     backward_date = @view_date - 7.days
     forward_date = @view_date + 7.days
 
@@ -29,7 +27,7 @@ class MatchDaysController < ApplicationController
   def create
     @matchday = MatchDay.new(match_day_params.merge(day: params[:day], group: Group.find(params[:group])))
     if @matchday.save
-      redirect_to 'index'
+      redirect_to match_days_path
     end
   end
 

@@ -1,7 +1,7 @@
-<div class="col-xs-1 box text-center">
+<div class="col-xs-1 box text-center matchdaycard">
   <p class="day-of-the-week"><%= match_day.day.strftime("%A") %></p>
   <p><%= match_day.day.strftime("%d/%m/%Y") %></p><hr>
-      <% if match_day.matches.nil? %>
+      <% if match_day.matches.length == 0 %>
         <%= link_to "Add a new match", match_days_path(day: match_day.day, group: @group), class:"text-center", method: :post %>
       <% else %>
         <% match_day.matches.each do |match| %>
