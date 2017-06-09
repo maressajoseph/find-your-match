@@ -7,7 +7,7 @@ Match.destroy_all
 
 admin = User.create!(email: "admin@admin.com", password: "123456", admin: true, first_name: "I am", last_name: "Admin")
 
-student_dummy = User.create!(email: "dummy@dummy.com", password: "123456", admin: false, dummy: true, first_name: "Nobody", last_name: "You can add yourself to another pair today, because there's an odd number of students")
+student_dummy = User.create!(email: "dummy@dummy.com", password: "123456", admin: false, dummy: true, first_name: "Nobody", last_name: "- You can add yourself to another pair today, because there's an odd number of students")
 
 student_a = User.create!(email: "h1@ho.com", password: "123456", admin: false, first_name: "Maressa", last_name: "Joseph")
 student_b = User.create!(email: "h2@ho.com", password: "123456", admin: false, first_name: "Bram", last_name: "Kaashoek")

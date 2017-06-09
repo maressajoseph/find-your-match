@@ -48,7 +48,7 @@ a:hover {
   text-decoration: none;
 }
 
-h6 {
+.footer {
   font-size: 15px;
   color: #a5a5a5;
 }
@@ -59,4 +59,28 @@ h3 {
 
 #admin {
   color: #18BC97;
+}
+
+h2 {
+  color: #18BC97;
+}
+
+h6 {
+   width: 100%;
+   text-align: center;
+   border-bottom: 4px solid white;
+   line-height: 0.1em;
+   margin: 10px 0 20px;
+   color: white;
+   font-size: 25px;
+}
+
+h6 span {
+    background: #18BC97;
+    padding:0 10px;
+}
+
+.navbar-brand {
+  font-size: 22px;
+  font-weight: 600;
 }
